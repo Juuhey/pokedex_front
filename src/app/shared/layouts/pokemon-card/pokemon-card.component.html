@@ -2,7 +2,7 @@
   <div class="types-container mt-2">
     @for (type of pokemon.default_variety.types; track type.name){
     <img [src]="type.sprite_url" alt="type_logo">
-    <p>{{type.name}}</p>
+    <!-- <p>{{type.name}}</p> -->
     }
   </div>
   <div [ngClass]="getBackgroundClass()" class="flex justify-center">
