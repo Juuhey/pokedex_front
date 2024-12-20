@@ -1,12 +1,22 @@
-<div class="card clickable rounded-lg border-2 border-black">
-  <div class="types-container mt-2">
+<div class="card clickable rounded-lg border-2 border-black w-full h-full">
+  <!-- <div class="types-container mt-2">
     @for (type of pokemon.default_variety.types; track type.name){
     <img [src]="type.sprite_url" alt="type_logo">
-    <!-- <p>{{type.name}}</p> -->
+    <p>{{type.name}}</p>
     }
-  </div>
-  <div [ngClass]="getBackgroundClass()" class="flex justify-center">
-    <img [src]="pokemon.default_variety.sprites?.artwork_url" [alt]="pokemon.name" class="h-24">
+  </div> -->
+  
+  <div [ngClass]="getBackgroundClass()" class="flex z-0 justify-center">
+
+    @if (pokemon.default_variety.types) {
+      <svg width="100" height="100" viewBox="0 0 208 210" fill='white' xmlns="http://www.w3.org/2000/svg" class="z-30 static" [class]="'fill-'+pokemon.default_variety.types[0].name.toLowerCase()+'darker'">
+        <path d="M141.381 115C141.381 130.122 129.122 142.381 114 142.381C98.8779 142.381 86.619 130.122 86.619 115C86.619 99.8779 98.8779 87.619 114 87.619C129.122 87.619 141.381 99.8779 141.381 115Z"/>
+        <path d="M114 230C171.935 230 219.864 187.159 227.835 131.429H160.481C153.715 150.571 135.459 164.286 114 164.286C92.5406 164.286 74.2846 150.571 67.5187 131.429H0.164551C8.13618 187.159 56.065 230 114 230ZM67.5187 98.5714H0.164551C8.13618 42.8409 56.065 0 114 0C171.935 0 219.864 42.8409 227.835 98.5714H160.481C153.715 79.429 135.459 65.7143 114 65.7143C92.5406 65.7143 74.2846 79.429 67.5187 98.5714ZM141.381 115C141.381 130.122 129.122 142.381 114 142.381C98.8779 142.381 86.619 130.122 86.619 115C86.619 99.8779 98.8779 87.619 114 87.619C129.122 87.619 141.381 99.8779 141.381 115Z"/>
+      </svg>
+    }
+
+    <img [src]="pokemon.default_variety.sprites?.artwork_url" [alt]="pokemon.name" class="z-50 w-auto object-contain relative">
+
   </div>
   <div class="flex flex-row items-center border-t-2 border-black rounded-lg justify-evenly">
     <div class="flex flex-col items-start w-2/3 p-2 mt-2">
@@ -14,7 +24,7 @@
       <span>n°{{ pokemon.id | formatPokemonId }}</span>
     </div>
     <div class="items-end">
-      <img src="assets/pokeball_disabled.svg" alt="jemenfoudesaveugles">
+      <img src="assets/pokeball_disabled.svg" alt="bouton pokeball">
     </div>
   </div>
  

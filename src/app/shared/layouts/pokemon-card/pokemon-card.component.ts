@@ -1,5 +1,7 @@
+// Dans votre composant
 import { Component, Input } from '@angular/core';
 import { Pokemon } from '../../interfaces/pokemon';
+import { PokemonTypeService } from '../../services/pokemon-type.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -9,18 +11,9 @@ import { Pokemon } from '../../interfaces/pokemon';
 export class PokemonCardComponent {
   @Input() pokemon!: Pokemon;
 
+  constructor(private pokemonTypeService: PokemonTypeService) {}
+
   getBackgroundClass(): string {
-    if (
-      this.pokemon?.default_variety?.types &&
-      this.pokemon.default_variety.types.length > 0
-    ) {
-      const primaryType =
-        this.pokemon.default_variety.types[0].name.toLowerCase();
-      const className = `bg-${primaryType}-light`;
-      console.log(className);
-      return className;
-    }
-    console.log('SALUT');
-    return '';
+    return this.pokemonTypeService.getBackgroundClass(this.pokemon);
   }
 }
