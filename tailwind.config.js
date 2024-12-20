@@ -3,6 +3,11 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+
+  plugins: [
+    require('daisyui'),
+  ],
+  
   theme: {
     extend: {
       colors: {
@@ -60,7 +65,7 @@ module.exports = {
 
         'rock': {
           'light': '#EAEAEA',
-          'default': '#B4B3B',
+          'default': '#B4B3B3',
           'dark': '#868180',
           'darker': '#5B5B5B'
         },
@@ -128,16 +133,27 @@ module.exports = {
           'darker': '#66E052'
         },
 
-        'fly': {
-          'light': '#F9E9E9',
-          'default': '#FFD8C7',
-          'dark': '#FDB89A',
-          'darker': '#E08E52'
+        'flying': {
+          'light': '#FFD8C7',
+          'default': '#D3C7C4',
+          'dark': '#A4A394',
+          'darker': '#A6A497'
         },
 
         'card-pokeball-bg': '#E4E4E4'
+      },
+      backgroundImage: {
+        'pokeball-pattern': "url('assets/pokeball_disabled.svg')",
       }
     },
   },
+
+  safelist: [
+    {
+      pattern: /(grass|fire|water|electric|ice|normal|fighting|poison|ground|flying|psychic|bug|rock|ghost|dragon|dark|steel|fairy)-(light|default|dark|darker)/,
+      variants: ['hover', 'focus'],
+    },
+  ],
+
   plugins: [],
 }

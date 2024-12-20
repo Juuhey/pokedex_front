@@ -5,7 +5,7 @@ import {PokemonDetailComponent} from "./pages/pokemon-detail/pokemon-detail.comp
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: PokemonListComponent
   },
   {

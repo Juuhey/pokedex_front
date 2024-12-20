@@ -1,23 +1,156 @@
+<!-- Template HTML -->
 @if (pokemon){
-  <h1 class="flex items-center mb-6"><a [routerLink]="['/']" class="btn btn-circle btn-primary mr-2"><-</a> {{pokemon.name}}</h1>
-  <div class="flex items-center justify-center p-4 relative">
-    <img [src]="pokemon.default_variety.sprites?.artwork_url" [alt]="pokemon.name" class="w-full max-w-md">
-    <div class="absolute top-0 left-0 p-4 flex flex-col gap-2">
-      @for (type of pokemon.default_variety.types; track type.id){
-        <img [src]="type.sprite_url" [alt]="type.name" class="h-6">
-      }
-    </div>
-  </div>
-  <div class="flex items-center justify-center gap-3">
-    <img [src]="pokemon.default_variety.sprites?.front_url" alt="front sprite" class="h-24 w-24 p-1 bg-neutral rounded-lg">
-    <img [src]="pokemon.default_variety.sprites?.front_shiny_url" alt="front sprite shiny" class="h-24 w-24 p-1 bg-neutral rounded-lg">
-    <img [src]="pokemon.default_variety.sprites?.back_url" alt="back sprite" class="h-24 w-24 p-1 bg-neutral rounded-lg">
-    <img [src]="pokemon.default_variety.sprites?.back_shiny_url" alt="back sprite shiny" class="h-24 w-24 p-1 bg-neutral rounded-lg">
-  </div>
+    <div [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','bg')" class="py-5 border-b-2 border-black">
 
-  <div class="flex items-center justify-center gap-3">
-    <p>{{pokemon.category}}</p>
-    <p>{{pokemon.default_variety.weight}}</p>
-    <p>{{pokemon.default_variety.height}}</p>
+      <div class="container mx-auto px-4 max-w-2xl">
+
+        <div class="flex items-center justify-between">
+          <a [routerLink]="['/list']" class="btn btn-circle btn-ghost text-2xl">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.15111 15.9985C4.88552 16.2642 4.73633 16.6244 4.73633 17.0001C4.73633 17.3757 4.88552 17.736 5.15111 18.0017L13.1652 26.0158C13.2959 26.1511 13.4522 26.259 13.625 26.3332C13.7979 26.4075 13.9838 26.4466 14.1719 26.4482C14.36 26.4498 14.5465 26.414 14.7206 26.3428C14.8947 26.2715 15.0529 26.1663 15.1859 26.0333C15.3189 25.9003 15.4241 25.7421 15.4954 25.568C15.5666 25.3939 15.6024 25.2074 15.6008 25.0193C15.5992 24.8312 15.5601 24.6453 15.4858 24.4724C15.4116 24.2996 15.3037 24.1433 15.1684 24.0126L9.57253 18.4168L28.3334 18.4168C28.7092 18.4168 29.0695 18.2675 29.3352 18.0018C29.6009 17.7362 29.7501 17.3758 29.7501 17.0001C29.7501 16.6244 29.6009 16.264 29.3352 15.9984C29.0695 15.7327 28.7092 15.5834 28.3334 15.5834L9.57253 15.5834L15.1684 9.98759C15.4264 9.72041 15.5692 9.36256 15.566 8.99111C15.5628 8.61967 15.4138 8.26435 15.1511 8.00169C14.8884 7.73902 14.5331 7.59003 14.1617 7.58681C13.7902 7.58358 13.4324 7.72637 13.1652 7.98443L5.15111 15.9985Z" fill="white"/>
+          </svg>
+          </a>
+
+
+          <div class="flex items-center justify-around gap-3">
+            <!-- volume_cri -->
+            <div class="border-solid border-white border-b pb-1">
+              <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.7729 20C16.0198 20 20.2729 15.7468 20.2729 10.5C20.2729 5.25315 16.0198 1 10.7729 1C5.5261 1 1.27295 5.25315 1.27295 10.5C1.27295 15.7468 5.5261 20 10.7729 20Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.7733 13.35C11.5292 13.35 12.2541 13.0497 12.7886 12.5152C13.3231 11.9807 13.6233 11.2558 13.6233 10.5C13.6233 9.7441 13.3231 9.01919 12.7886 8.48471C12.2541 7.95023 11.5292 7.64996 10.7733 7.64996C10.0175 7.64996 9.29256 7.95023 8.75809 8.48471C8.22361 9.01919 7.92334 9.7441 7.92334 10.5C7.92334 11.2558 8.22361 11.9807 8.75809 12.5152C9.29256 13.0497 10.0175 13.35 10.7733 13.35Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1.27295 10.5H7.92295M13.6229 10.5H20.2729" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+
+            <div class="border-solid border-white border-b pb-1">
+              <!-- pokeball (favorite function) -->
+              <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.4316 4.88637C20.4316 4.88637 21.7271 6.58665 21.7271 9.42046C21.7271 12.2543 20.4316 13.9545 20.4316 13.9545" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 12.2498V8.07157C1 7.47483 1.23705 6.90253 1.65901 6.48058C2.08097 6.05862 2.65326 5.82157 3.25 5.82157H6.5125C6.73246 5.82151 6.94758 5.75697 7.13125 5.63594L13.8813 1.18544C14.0508 1.07375 14.2475 1.01005 14.4504 1.00109C14.6533 0.992139 14.8548 1.03826 15.0336 1.13457C15.2123 1.23088 15.3617 1.37379 15.4658 1.54813C15.57 1.72247 15.625 1.92174 15.625 2.12481V18.1966C15.625 18.3996 15.57 18.5989 15.4658 18.7733C15.3617 18.9476 15.2123 19.0905 15.0336 19.1868C14.8548 19.2831 14.6533 19.3292 14.4504 19.3203C14.2475 19.3113 14.0508 19.2476 13.8813 19.1359L7.13125 14.6854C6.94758 14.5644 6.73246 14.4999 6.5125 14.4998H3.25C2.65326 14.4998 2.08097 14.2628 1.65901 13.8408C1.23705 13.4188 1 12.8466 1 12.2498Z" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+      
+
+          </div>
+        </div>
+
+        <!-- Name and id -->
+        <header class="flex items-center gap-4 mb-6 pt-4">
+          <h1 class="text-2xl text-white font-bold">{{pokemon.name}}</h1>
+          <span class="ml-auto text-lg text-white font-bold">#{{pokemon.id.toString().padStart(4, '0')}}</span>
+        </header>
+
+        <!-- Main Pokemon image and types -->
+        <div class="relative mb-6">
+          <div class="relative top-2 left-2 flex flex-col gap-2">
+
+            @for (type of pokemon.default_variety.types; track type.id){
+              <div [ngClass]="getTypeColorClass(type.name,'darker','bg')" class="flex flex-row text-center rounded-full w-fit min-w-24 text-white items-center gap-2 font-semibold">
+                <!-- type_img -->
+                <img [src]="type.custom_sprite_url" [alt]="type.name" class="h-8 w-8">
+                <p class="align-center mr-2 pr-2" >{{type.name}}</p>
+              </div>
+            }
+          </div>
+
+          <div class="flex items-center justify-center p-8">
+            <img 
+              [src]="pokemon.default_variety.sprites?.artwork_url" 
+              [alt]="pokemon.name" 
+              class="w-full max-w-[280px] h-auto"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="container mx-auto px-4 mt-10 max-w-2xl">
+
+    <!-- Tabs navigation -->
+    <div class="tabs mb-6 relative">
+      <div class="flex w-full justify-around gap-1 relative">
+        @for (tab of tabs; track tab.id) {
+          <button 
+            class="flex-1 min-w-0 relative py-2 text-center transition-all duration-300 text-sm"
+            [class.font-bold]="activeTab === tab.id"
+            (click)="setActiveTab($event, tab.id)"
+          >
+            {{tab.label}}
+          </button>
+        }
+        <!-- Barre animée -->
+        <div 
+          class="absolute bottom-0 h-0.5 transition-all duration-300 ease-in-out"
+          [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','bg')"
+          [style.width]="getIndicatorWidth()"
+          [style.left]="getIndicatorPosition()"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Tab content -->
+    <div [ngSwitch]="activeTab" class="pb-8">
+      <!-- Information tab -->
+      <div *ngSwitchCase="'info'" class="space-y-6">
+        <div [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','border')" class="grid grid-cols-3 gap-2 text-center border-2 rounded-xl">
+          <div class="flex flex-col items-center p-4 bg-base-200 rounded-xl">
+            <span class="text-sm text-gray-800">POIDS</span>
+            <span [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','text')" class="font-bold">{{pokemon.default_variety.weight / 10}}kg</span>
+          </div>
+          <div [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','text')" class="flex flex-col items-center p-4 bg-base-200 rounded-xl">
+            <span class="text-sm text-gray-800">TAILLE</span>
+            <span class="font-bold">{{pokemon.default_variety.height / 10}}m</span>
+          </div>
+          <div [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','text')" class="flex flex-col items-center p-4 bg-base-200 rounded-xl">
+            <span class="text-sm text-gray-800">ESPÈCE</span>
+            <span class="font-bold">{{pokemon.category}}</span>
+          </div>
+        </div>
+
+        <!-- sprites -->
+        <div class="grid grid-cols-4 sm:grid-cols-4 gap-2">
+          <img [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','border')" [src]="pokemon.default_variety.sprites?.front_url" alt="front sprite" class="w-fit aspect-square p-2 bg-base-200 border-2">
+          <img [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','border')" [src]="pokemon.default_variety.sprites?.front_shiny_url" alt="front sprite shiny" class="w-full aspect-square p-2 bg-base-200 border-2">
+          <img [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','border')" [src]="pokemon.default_variety.sprites?.back_url" alt="back sprite" class="w-full aspect-square p-2 bg-base-200 border-2">
+          <img [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','border')" [src]="pokemon.default_variety.sprites?.back_shiny_url" alt="back sprite shiny" class="w-full aspect-square p-2 bg-base-200 border-2">
+        </div>
+
+        <!-- desc -->
+        <div class="my-5 justify-center items-center">
+          <h3 class="text-md items-center text-center justify-center font-bold" [ngClass]="getTypeColorClass(getPrimaryTypeName(),'dark','text')">Description</h3>
+          <p class="text-center px-4" [ngClass]="getTypeColorClass(getPrimaryTypeName(),'darker','text')">{{pokemon.default_variety.description}}</p>
+        </div>
+
+      </div>
+
+      
+      <!-- Stats tab -->
+      <div *ngSwitchCase="'stats'" class="flex flex-col mt-5 space-y-2">
+        @for (stat of stats; track stat.name) {
+          <div class="flex items-center space-x-2">
+            <span class="w-20">{{stat.label}}</span>
+            
+            <progress
+              [ngClass]="getTypeColorClass(getPrimaryTypeName(),'default','bg')"
+              class="progress rounded-full w-full" 
+              [value]="getStat(stat.name)" 
+              [max]="stat.max"
+            ></progress>
+      
+            <span class="w-10 text-right">{{getStat(stat.name)}}</span>
+          </div>
+        }
+      </div>
+
+      <!-- Moves tab -->
+      <div *ngSwitchCase="'moves'" class="text-center">
+        <p class="text-gray-500">Fonctionnalité à venir</p>
+      </div>
+
+      <!-- Forms tab -->
+      <div *ngSwitchCase="'forms'" class="text-center">
+        <p class="text-gray-500">Fonctionnalité à venir</p>
+      </div>
+    </div>
   </div>
 }
